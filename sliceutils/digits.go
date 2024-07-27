@@ -1,15 +1,11 @@
-package arrays
+package sliceutils
 
-import (
-	"regexp"
-	"strings"
-)
+import strutils "github.com/aleaccurso/tools/strUtils"
 
 // RemoveEndDigits removes trailing digits from each string in a slice
 func RemoveEndDigits(slice []string) []string {
-	re := regexp.MustCompile(`\d+$`)
 	for i, s := range slice {
-		slice[i] = strings.TrimSpace(re.ReplaceAllString(s, ""))
+		slice[i] = strutils.RemoveEndDigits(s)
 	}
 	return slice
 }
