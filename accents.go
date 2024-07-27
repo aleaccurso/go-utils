@@ -1,4 +1,4 @@
-package strutils
+package tools
 
 import (
 	"regexp"
