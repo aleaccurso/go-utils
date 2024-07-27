@@ -1,5 +1,5 @@
-module github.com/aleaccurso/tools
+module github.com/aleaccurso/mytools
 
 go 1.22.3
 
-require golang.org/x/text v0.16.0 // indirect
+require golang.org/x/text v0.16.0

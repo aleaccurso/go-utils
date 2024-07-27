@@ -1,4 +1,4 @@
-package tools
+package mytools
 
 // RemoveAllEndDigits removes trailing digits from each string in a slice
 func RemoveAllEndDigits(slice []string) []string {
