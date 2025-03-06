@@ -7,26 +7,19 @@ import (
 
 // MapEnum takes a map of interface_a to interface_b and a value of interface_a,
 // then returns the corresponding interface_b value
-func MapEnum(mapping map[interface{}]interface{}, value interface{}) interface{} {
-	// Get target type
-	var targetType reflect.Type
-	for _, v := range mapping {
-		targetType = reflect.TypeOf(v)
-		break
-	}
+func MapEnum[K comparable, V any](mapping map[K]V, value K) V {
+	var defaultValue V
+    targetType := reflect.TypeOf(defaultValue)
 
 	strValue := fmt.Sprintf("%v", value)
 
 	if mapping == nil {
-		return reflect.ValueOf(strValue).Convert(targetType).Interface()
+		return reflect.ValueOf(strValue).Convert(targetType).Interface().(V)
 	}
 
-	for k, v := range mapping {
-		// Use reflect.DeepEqual to compare interfaces since direct comparison might not work
-		if reflect.DeepEqual(k, value) {
-			return v
-		}
-	}
+	if val, ok := mapping[value]; ok {
+        return val
+    }
 
-	return reflect.ValueOf(strValue).Convert(targetType).Interface()
+	return reflect.ValueOf(strValue).Convert(targetType).Interface().(V)
 }
