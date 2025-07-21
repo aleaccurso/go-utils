@@ -47,9 +47,9 @@ def reduce_image_size(input_path, output_path):
     # Resize the image
     resized_img = img.resize((new_width, new_height), Image.LANCZOS)
     # Rotate the image
-    rotated_img = rotate_image(resized_img)
+    # rotated_img = rotate_image(resized_img)
     # Apply sharpening filter
-    sharpened_img = rotated_img.filter(ImageFilter.SHARPEN)
+    sharpened_img = resized_img.filter(ImageFilter.SHARPEN)
     # Save picture
     sharpened_img.save(output_path, optimize=True, quality=100)
     # Close the images
@@ -72,8 +72,7 @@ def get_non_py_files(folder_path) -> list[str]:
 
 
 def execute_reduce_picture_size_steps():
-    # folder = input("Enter the source folder path: ")
-    folder = "/Users/medici/Desktop/ai/Pictures/recipes"
+    folder = input("Enter the source folder path: ")
     origin_folder_path = Path(folder)
     target_folder_path = origin_folder_path / "resized"
     # Create the target folder if it doesn't exist
@@ -84,7 +83,7 @@ def execute_reduce_picture_size_steps():
     for filename in filenames:
         count += 1
         print(f"Reducing size of {filename} ({count}/{len(filenames)})")
-        # reduce_image_size(origin_folder_path / filename, target_folder_path / filename)
+        reduce_image_size(origin_folder_path / filename, target_folder_path / filename)
 
 
 if __name__ == "__main__":
